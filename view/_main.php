@@ -46,9 +46,9 @@
 
         <form action="" method="post" class="settings__sort col-lg-3  mt-3 pt-3">
           <h4 class="text-center">Sorting on</h4>
-          <input type="submit" value="Author" class="btn btn-primary col-lg-12">
-          <input type="submit" value="Email" class="btn btn-primary col-lg-12 mt-3">
-          <input type="submit" value="Status" class="btn btn-primary col-lg-12 mt-3">
+          <input type="submit" value="Author" name="sort" class="btn btn-primary col-lg-12">
+          <input type="submit" value="Email" name="sort" class="btn btn-primary col-lg-12 mt-3">
+          <input type="submit" value="Status" name="sort" class="btn btn-primary col-lg-12 mt-3">
         </form>
       </div>
     </div>
@@ -63,9 +63,19 @@
 
     <div class="row justify-content-center">
         <?php for($i = 0; $i < $countTask; $i++) : 
-          if(isset($tasks[$start+$i])) :?>
+          $num = $start + $i;
+          if(isset($tasks[$num])) :?>
           <div class="item col-lg-10 mt-5 p-3 pl-5">
-            <h4><?=$tasks[$start+$i]['task'];?></h4>
+            <span class="author"><?=$tasks[$num]['author']?></span>
+            <h4><?=$tasks[$num]['task'];?></h4>
+            <span class="mail"><?=$tasks[$num]['email']?></span>
+            <?php if($tasks[$num]['status'] == '0') {
+              echo '<span class="text-danger">waiting</span>';
+            } elseif($tasks[$num]['status'] == '1') {
+              echo '<span class="text-success">success</span>';
+            } else {
+              echo '<span class="text-info">edited by admin</span>';
+            } ?>
           </div>
           <?php endif;
         endfor; ?>

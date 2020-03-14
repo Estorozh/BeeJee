@@ -12,7 +12,7 @@
                 }
             }
         }
-        if($err == '') {
+        if(empty($err)) {
             if (isset($_POST['username'])) {
                 include_once ('controllers/login.php');
             } elseif(isset($_POST['author'])) {
@@ -20,6 +20,8 @@
             } elseif(isset($_POST['logout'])) {
                 logout();
                 reload();
+            } elseif($_POST['sort']) {
+                $field = $_POST['sort'];
             } else {
                 $err = 'dont\'t find this form';
             }

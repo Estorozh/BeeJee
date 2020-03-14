@@ -9,6 +9,8 @@
     $db = db_connect();
 
     // vardump($_POST);
+    // echo 'sorted by '.$field;
+
     $tasks = getTasks('author');
 
     include_once ('./view/pagination.php');

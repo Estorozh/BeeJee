@@ -3,7 +3,7 @@
     $countTask = 3;
     $total = intval((count($tasks) - 1) / $countTask) + 1;
 
-    $page = intval($_GET['page']);
+    $page = intval($_GET['page'] ?? 1);
     if(empty($page) || $page < 0 || !is_numeric($page)) {
         $page = 1;
     } elseif($page > $total) { 
