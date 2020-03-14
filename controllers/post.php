@@ -4,30 +4,31 @@
     if(count($_POST) > 0) {
         foreach($_POST as $key=>$value) {
             if(empty($value)) {
-                $msg = "Please, fill all fields";
+                $err = "Please, fill all fields";
             }
             if($key == 'email'){
                 if(!checkEmail($value)) {
-                    $msg = "Please, input the correct email";
+                    $err = "Please, input the correct email";
                 }
             }
         }
-        if (isset($_POST['username'])) {
-            include_once ('controllers/login.php');
-        } elseif(isset($_POST['author'])) {
-            include_once ('controllers/taskController.php');
-        } elseif(isset($_POST['logout'])) {
-            logout();
-            reload();
-        } else {
-            $msg = 'dont\'t find this form';
+        if($err == '') {
+            if (isset($_POST['username'])) {
+                include_once ('controllers/login.php');
+            } elseif(isset($_POST['author'])) {
+                include_once ('controllers/taskController.php');
+            } elseif(isset($_POST['logout'])) {
+                logout();
+                reload();
+            } else {
+                $err = 'dont\'t find this form';
+            }
         }
-        
     } else{
         $author = '';
         $email = '';
         $task = '';
-        $msg = '';
+        $err = '';
     }
 
     // $tasks->getAll = getTasks('author');

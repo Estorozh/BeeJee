@@ -7,5 +7,5 @@
         setcookie('password', '123', time() + 3600 * 24 * 7, '/');
         reload();
     } else {
-        $msg = "Access forbidden";
+        $err = "Access forbidden";
     }

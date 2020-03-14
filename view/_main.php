@@ -27,33 +27,55 @@
     </div>
   </header>
   <main>
-    <div class="addItem container-fluid mt-3">
-      <form action="" method="post" class="item row col-lg-7 mt-3 p-3 pl-5">
-        <p class="col-lg-12">Your name</p>
-        <input type="text" name="author" placeholder="name" class="col-lg-5 col-xs-12">
-        <p class="col-lg-12">Your email</p>
-        <input type="text" name="email" placeholder="email" class="col-lg-5 col-xs-12">
-        <p class="col-lg-12">Your task</p>
-        <input type="text" name="task" placeholder="task" class="col-lg-9 col-xs-12">
-        <input type="submit" value="Send" class="btn-send btn btn-primary col-lg-2 offset-lg-10 mt-2">
-      </form>
-    </div>
-
-    <!-- TODO foreach in table -->
-    <div class="items container-fluid mt-3">
-      <div class="row justify-content-center">
-        <?php foreach($tasks as $task) : ?>
-          <div class="item col-lg-10 mt-5 p-3 pl-5">
-            <h4><?=$task['task'];?></h4>
+    <div class="settings container-fluid mt-3">
+      <div class="item row col-lg-7">
+        <form action="" id="settings__addItem" method="post" class="col-lg-9 mt-3 p-3 pl-5">
+          <h4 class="text-center">Add task</h4>
+          <div class="col-lg-5 col-xs-12">
+            <p class="col-lg-12">Your name</p>
+            <input type="text" name="author" placeholder="name" class="col-lg-12">
           </div>
-        <?php endforeach; ?>
+          <div class="col-lg-6 col-xs-12">
+            <p class="col-lg-12">Your email</p>
+            <input type="text" name="email" placeholder="email" class="col-lg-12">
+          </div>
+          <p class="col-lg-12">Your task</p>
+          <input type="text" name="task" placeholder="task" class="col-lg-11 col-xs-12">
+          <input type="submit" value="Send" class="btn-send btn btn-primary col-lg-2 offset-lg-5 mt-2">
+        </form>
+
+        <form action="" method="post" class="settings__sort col-lg-3  mt-3 pt-3">
+          <h4 class="text-center">Sorting on</h4>
+          <input type="submit" value="Author" class="btn btn-primary col-lg-12">
+          <input type="submit" value="Email" class="btn btn-primary col-lg-12 mt-3">
+          <input type="submit" value="Status" class="btn btn-primary col-lg-12 mt-3">
+        </form>
       </div>
     </div>
 
-  <div class="modal <?php if(!empty($msg)) {echo 'open';} ?>">
+    <div class="items container-fluid mt-3">
+
+      <?php if(count($tasks)>3) :?>
+        <div class="row justify-content-center">
+          <?=$paginator;?>
+        </div>
+      <?php endif; ?>    
+
+    <div class="row justify-content-center">
+        <?php for($i = 0; $i < $countTask; $i++) : 
+          if(isset($tasks[$start+$i])) :?>
+          <div class="item col-lg-10 mt-5 p-3 pl-5">
+            <h4><?=$tasks[$start+$i]['task'];?></h4>
+          </div>
+          <?php endif;
+        endfor; ?>
+      </div>
+    </div>
+
+  <div class="modal <?php if(!empty($err)) {echo 'open';} ?>">
     <div class="modal-body">
       <span class="modal-close">&times;</span>
-      <p class="modal-body-text"><?=$msg?></p>
+      <p class="modal-body-text"><?=$err?></p>
     </div>
     
   </div>
