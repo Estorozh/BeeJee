@@ -5,12 +5,10 @@
         foreach($_POST as $key=>$value) {
             if(empty($value)) {
                 $msg = "Please, fill all fields";
-                break;
             }
             if($key == 'email'){
                 if(!checkEmail($value)) {
                     $msg = "Please, input the correct email";
-                    exit();
                 }
             }
         }
@@ -18,6 +16,9 @@
             include_once ('controllers/login.php');
         } elseif(isset($_POST['author'])) {
             include_once ('controllers/taskController.php');
+        } elseif(isset($_POST['logout'])) {
+            logout();
+            reload();
         } else {
             $msg = 'dont\'t find this form';
         }

@@ -8,7 +8,7 @@
     }
 
     function addTask($author, $email, $task){
-      $query = db_query(sprintf("INSERT INTO Tasks (author, email, task) VALUES (%s,%s,%s)", $author, $email, $task));
+      $query = db_query(sprintf("INSERT INTO Tasks (author, email, task) VALUES ('%s', '%s', '%s')", $author, $email, $task));
     
       $db = db_connect();
       return $db->lastInsertId();

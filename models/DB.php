@@ -11,11 +11,12 @@
 		return $db;
 	}
 	
-	function db_query($sql, $params = []){
+	function db_query($sql) {
 		$db = db_connect();
 		
 		$query = $db->prepare($sql);
-		$query->execute($params);
+		
+		$query->execute();
 		
 		db_check_error($query);
 		
@@ -27,5 +28,6 @@
 	
 		if($info[0] != PDO::ERR_NONE){
 			exit('ERROR DB: '.$info[2]);
+			// return $msg = "ERROR_DB: $info[2]";
 		}
 	}

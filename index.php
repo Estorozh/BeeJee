@@ -9,6 +9,12 @@
 
     $db = db_connect();
 
-    vardump($_POST);
+    // vardump($_POST);
+    $tasks = getTasks('author');
 
     include_once ('./view/_main.php');
+
+    function reload() {
+        header('Location: index.php');
+        exit;
+    }

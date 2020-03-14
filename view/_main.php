@@ -12,11 +12,11 @@
 
   <header class="container-fluid">
     <div class="login row p-3 pl-5">
-      <?php if(auth()) { ?>
-        <div class="d-flex col-lg-12 justify-content-around">
-          <span class="login-username">username: <?=$_COOKIE['username']?></span>
-          <button type="submit" name="Logout" class="btn-logout btn btn-secondary">Logout</button>
-        </div>
+      <?php if($isAuth) { ?>
+        <form action="" method="post" class="d-flex col-lg-12 justify-content-around">
+          <span class="login-username">username: <?=$_COOKIE['username'] ?? '';?></span>
+          <button name="logout" class="btn-logout btn btn-secondary" value='logout'>Logout</button>
+        </form>
       <?php } else {  ?>
         <form action="" id="auth" method="post" class="d-flex col-lg-12 justify-content-center">
           <input type="text" name="username" placeholder="username" class="pl-2">
@@ -42,18 +42,13 @@
     <!-- TODO foreach in table -->
     <div class="items container-fluid mt-3">
       <div class="row justify-content-center">
-        <div class="item col-lg-10 mt-5 p-3 pl-5">
-          <h4> <? //vardump($task)?></h4>
-        </div>
-        <div class="item col-lg-10 mt-5 p-3 pl-5">
-          <h4>text ToDo2</h4>
-        </div>
-        <div class="item col-lg-10 mt-5 p-3 pl-5">
-          <h4>text ToDo2</h4>
-        </div>
+        <?php foreach($tasks as $task) : ?>
+          <div class="item col-lg-10 mt-5 p-3 pl-5">
+            <h4><?=$task['task'];?></h4>
+          </div>
+        <?php endforeach; ?>
       </div>
     </div>
-  </main>
 
   <div class="modal <?php if(!empty($msg)) {echo 'open';} ?>">
     <div class="modal-body">

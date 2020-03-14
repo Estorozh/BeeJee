@@ -16,3 +16,12 @@
     }
 
     $isAuth = auth();
+
+    function logout() {
+        setcookie('username','admin',time(),'/');
+        setcookie('password','123',time(),'/');
+        if ($_SESSION['is_auth']) {
+            unset ($_SESSION['is_auth']);
+        }
+        return $isAuth = false;
+    }

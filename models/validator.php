@@ -1,7 +1,7 @@
 <?php
 
 function xss($var) {
-    return trim(htmlspecialchars($var));
+    return (string) trim(htmlspecialchars($var));
 }
 
 function checkEmail($email) {
@@ -12,7 +12,7 @@ function checkLength($var, $length) {
     if(is_array($length)) {
 
     } else {
-        
+
     }
     
 }
