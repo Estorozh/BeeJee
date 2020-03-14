@@ -22,15 +22,15 @@
                 reload();
             } elseif($_POST['sort']) {
                 $field = $_POST['sort'];
+                changeSort();
             } else {
                 $err = 'dont\'t find this form';
             }
         }
-    } else{
+    } else {
+        $field = 'author';
         $author = '';
         $email = '';
         $task = '';
         $err = '';
     }
-
-    // $tasks->getAll = getTasks('author');

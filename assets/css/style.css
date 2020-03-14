@@ -104,6 +104,12 @@ body {
   left: 0; right: 0;
   z-index: -1;
 }
+.status {
+  position: absolute;
+  right: 1rem;
+  font-weight: bold;
+  font-size: 14px;
+}
 
 
 .modal {

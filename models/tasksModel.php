@@ -1,19 +1,29 @@
 <?php
 
-  include_once ('models/DB.php');
+    include_once ('models/DB.php');
 
-    function getTasks($field, $sort = "DESC") {
-        $query = db_query(sprintf("SELECT * FROM Tasks ORDER BY %s %s", $field, $sort));
+    function getTasks($field,$sort) {
+        $query = db_query("SELECT * FROM Tasks ORDER BY $field ".$sort);
         return $query->fetchAll();
     }
 
     function addTask($author, $email, $task){
-      $query = db_query(sprintf("INSERT INTO Tasks (author, email, task) VALUES ('%s', '%s', '%s')", $author, $email, $task));
-    
-      $db = db_connect();
-      return $db->lastInsertId();
+        $query = db_query(sprintf("INSERT INTO Tasks (author, email, task) VALUES ('%s', '%s', '%s')", $author, $email, $task));
+      
+        $db = db_connect();
+        
+        return $db->lastInsertId();
     }
     
     function getTask_one() {
-      echo 'hello';
+        echo 'hello';
+    }
+
+
+    if(empty($_COOKIE['sort'])) {
+      setcookie('sort','ASC', time()+3600*24, '/');
+    }
+    function changeSort() {
+        ($_COOKIE['sort'] == "ASC") ?  setcookie('sort','DESC', time()+3600*24, '/') : setcookie('sort','ASC', time()+3600*24, '/');
+        reload();
     }

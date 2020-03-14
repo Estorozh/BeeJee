@@ -69,13 +69,15 @@
             <span class="author"><?=$tasks[$num]['author']?></span>
             <h4><?=$tasks[$num]['task'];?></h4>
             <span class="mail"><?=$tasks[$num]['email']?></span>
+
             <?php if($tasks[$num]['status'] == '0') {
-              echo '<span class="text-danger">waiting</span>';
+              echo '<span class="status text-danger">waiting</span>';
             } elseif($tasks[$num]['status'] == '1') {
-              echo '<span class="text-success">success</span>';
+              echo '<span class="status text-success">success</span>';
             } else {
-              echo '<span class="text-info">edited by admin</span>';
+              echo '<span class="status text-info">edited by admin</span>';
             } ?>
+
           </div>
           <?php endif;
         endfor; ?>
