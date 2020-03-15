@@ -28,6 +28,5 @@
 	
 		if($info[0] != PDO::ERR_NONE){
 			exit('ERROR DB: '.$info[2]);
-			// return $err = "ERROR_DB: $info[2]";
 		}
 	}

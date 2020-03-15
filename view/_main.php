@@ -12,43 +12,62 @@
 
   <header class="container-fluid">
     <div class="login row p-3 pl-5">
-      <?php if($isAuth) { ?>
+      <?php if($isAuth) : ?>
         <form action="" method="post" class="d-flex col-lg-12 justify-content-around">
           <span class="login-username">username: <?=$_COOKIE['username'] ?? '';?></span>
           <button name="logout" class="btn-logout btn btn-secondary" value='logout'>Logout</button>
         </form>
-      <?php } else {  ?>
+      <?php else :  ?>
         <form action="" id="auth" method="post" class="d-flex col-lg-12 justify-content-center">
           <input type="text" name="username" placeholder="username" class="pl-2">
           <input type="password" name="password" placeholder="password" class="pl-2">
           <input type="submit" value="Signin" class="btn btn-primary btn-signin">
         </form>
-      <?php } ?>
+      <?php endif; ?>
     </div>
   </header>
   <main>
     <div class="settings container-fluid mt-3">
       <div class="item row col-lg-7">
-        <form action="" id="settings__addItem" method="post" class="col-lg-9 mt-3 p-3 pl-5">
-          <h4 class="text-center">Add task</h4>
-          <div class="col-lg-5 col-xs-12">
-            <p class="col-lg-12">Your name</p>
-            <input type="text" name="author" placeholder="name" class="col-lg-12">
-          </div>
-          <div class="col-lg-6 col-xs-12">
-            <p class="col-lg-12">Your email</p>
-            <input type="text" name="email" placeholder="email" class="col-lg-12">
-          </div>
-          <p class="col-lg-12">Your task</p>
-          <input type="text" name="task" placeholder="task" class="col-lg-11 col-xs-12">
-          <input type="submit" value="Send" class="btn-send btn btn-primary col-lg-2 offset-lg-5 mt-2">
-        </form>
+        <?php if(empty($editTask)) :?>
+          <form action="" id="settings__addItem" method="post" class="col-lg-9 col-md-12">
+            <h4 class="text-center">Add task</h4>
+            <div class="col-lg-5 col-xs-12">
+              <p class="col-lg-12">Your name</p>
+              <input type="text" name="author" placeholder="name" class="col-lg-12">
+            </div>
+            <div class="col-lg-6 col-xs-12">
+              <p class="col-lg-12">Your email</p>
+              <input type="text" name="email" placeholder="email" class="col-lg-12">
+            </div>
+            <p class="col-lg-12">Your task</p>
+            <input type="text" name="task" placeholder="task" class="col-lg-11 col-xs-12">
+            <input type="submit" name="addTask" value="Send" class="btn-send btn btn-primary col-lg-2 offset-lg-5 mt-2">
+          </form>
+
+        <?php else : ?>
+          <form action="" id="settings__editItem" method="post" class="col-lg-9 mt-3 p-3 pl-5">
+            <h4 class="text-center text-danger">Edit task</h4>
+            <div class="col-lg-5 col-xs-12">
+              <p class="col-lg-12">Name</p>
+              <input type="text" name="author" placeholder="name" class="col-lg-12" value="<?=$editTask['author'];?>">
+            </div>
+            <div class="col-lg-6 col-xs-12">
+              <p class="col-lg-12">Email</p>
+              <input type="text" name="email" placeholder="email" class="col-lg-12" value="<?=$editTask['email'];?>">
+            </div>
+            <p class="col-lg-12">Task</p>
+            <input type="text" name="task" placeholder="task" class="col-lg-11 col-xs-12" value="<?=$editTask['task'];?>">
+            <input type="hidden" name="id_task" value="<?=$editTask['id_task'];?>">
+            <input type="submit" name="editTask" value="Update" class="btn-send btn btn-primary col-lg-2 offset-lg-5 mt-2">
+          </form>
+        <?php endif;?>
 
         <form action="" method="post" class="settings__sort col-lg-3  mt-3 pt-3">
           <h4 class="text-center">Sorting on</h4>
-          <input type="submit" value="Author" name="sort" class="btn btn-primary col-lg-12">
-          <input type="submit" value="Email" name="sort" class="btn btn-primary col-lg-12 mt-3">
-          <input type="submit" value="Status" name="sort" class="btn btn-primary col-lg-12 mt-3">
+          <input type="submit" value="Author" name="sort" class="btn btn-primary col-lg-12 col-md-3">
+          <input type="submit" value="Email" name="sort" class="btn btn-primary col-lg-12 col-md-3">
+          <input type="submit" value="Status" name="sort" class="btn btn-primary col-lg-12 col-md-3">
         </form>
       </div>
     </div>
@@ -69,13 +88,24 @@
             <span class="author"><?=$tasks[$num]['author']?></span>
             <h4><?=$tasks[$num]['task'];?></h4>
             <span class="mail"><?=$tasks[$num]['email']?></span>
+            
+            <?php if($isAuth) : ?>
+              <form method="post">
+                <input type="submit" name="edit" class="btn-edit btn btn-primary" value="Edit task">
+                <input type="hidden" name="numTask" value="<?=$tasks[$num]["id_task"]?>">
+              </form>
+              <form method="post">
+                <input type="submit" name="ready" class="btn-ready btn btn-success" value="Success">
+                <input type="hidden" name="numTask" value="<?=$tasks[$num]["id_task"]?>">
+              </form>
+            <?php endif; ?>
 
             <?php if($tasks[$num]['status'] == '0') {
-              echo '<span class="status text-danger">waiting</span>';
+              echo '<span class="status text-danger">Waiting</span>';
             } elseif($tasks[$num]['status'] == '1') {
-              echo '<span class="status text-success">success</span>';
+              echo '<span class="status text-success">Success</span>';
             } else {
-              echo '<span class="status text-info">edited by admin</span>';
+              echo '<span class="status text-info">Edited by admin</span>';
             } ?>
 
           </div>

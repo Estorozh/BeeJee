@@ -15,14 +15,27 @@
         if(empty($err)) {
             if (isset($_POST['username'])) {
                 include_once ('controllers/login.php');
-            } elseif(isset($_POST['author'])) {
+
+            } elseif(isset($_POST['addTask'])) {
                 include_once ('controllers/taskController.php');
+
             } elseif(isset($_POST['logout'])) {
                 logout();
                 reload();
+
+            } elseif($_POST['edit']){
+                $editTask = getTask_one($_POST['numTask']);
+
+            } elseif($_POST['editTask']) {
+                include_once ('controllers/edit.php');
+
+            } elseif($_POST['ready']) {
+                successTask($_POST['numTask']);
+
             } elseif($_POST['sort']) {
                 $field = $_POST['sort'];
                 changeSort();
+                
             } else {
                 $err = 'dont\'t find this form';
             }
