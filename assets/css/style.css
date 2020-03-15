@@ -50,7 +50,8 @@ body {
   padding: 0;
   font-weight: bold;
 }
-#settings__addItem {
+#settings__addItem,
+#settings__editItem {
   padding: 1rem;
   padding-left: 3rem;
   margin-top: 1rem;
@@ -119,6 +120,7 @@ body {
 .status {
   position: absolute;
   top: 0;
+  left: 1rem;
   font-weight: bold;
   font-size: 14px;
 }
@@ -173,7 +175,7 @@ body {
   #settings__addItem::after, #settings__editItem::after {
     background-color: transparent;
   }
-  #settings__addItem {
+  #settings__addItem, #settings__editItem {
     padding: 0;
   }
   .settings__sort {
@@ -196,5 +198,8 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+  .login {padding: 0 !important;}
+  #auth {flex-wrap: wrap;}
+  #auth input { margin: 10px auto; width: 100%;}
   .settings__sort input:not(:nth-child(2)) {margin-top:1rem;}
 }

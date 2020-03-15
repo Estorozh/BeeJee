@@ -6,15 +6,13 @@
             if(empty($value)) {
                 $err = "Please, fill all fields<br>";
             }
-
-            if(isset($_POST['email'])) {
-                if(!checkEmail($_POST['email'])) {
-                    $msg="Please, input the correct email";
-                }
-            }
-
         }
-        if(empty($err)) {
+
+        if(isset($_POST['email']) && !checkEmail($_POST['email'])) {
+            $msg="Please, input the correct email";
+        }
+
+        if(empty($err) && empty($msg)) {
             if (isset($_POST['username'])) {
                 include_once ('controllers/login.php');
 

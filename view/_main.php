@@ -42,11 +42,11 @@
             </div>
             <p class="col-lg-12">Your task</p>
             <input type="text" name="task" placeholder="task" class="col-lg-11 col-xs-12">
-            <input type="submit" name="addTask" value="Save task" class="btn-send btn btn-primary col-lg-2 offset-lg-5 mt-2">
+            <input type="submit" name="addTask" value="Save task" class="btn-send btn btn-primary col-lg-4 mt-2">
           </form>
 
         <?php else : ?>
-          <form action="" id="settings__editItem" method="post" class="col-lg-9 mt-3 p-3 pl-5">
+          <form action="" id="settings__editItem" method="post" class="col-lg-9 col-md-12">
             <h4 class="text-center text-danger">Edit task</h4>
             <div class="col-lg-6 col-xs-12">
               <p class="col-lg-12">Email</p>
@@ -59,7 +59,7 @@
             <p class="col-lg-12">Task</p>
             <input type="text" name="task" placeholder="task" class="col-lg-11 col-xs-12" value="<?=$editTask['task'];?>">
             <input type="hidden" name="id_task" value="<?=$editTask['id_task'];?>">
-            <input type="submit" name="editTask" value="Update" class="btn-send btn btn-primary col-lg-2 offset-lg-5 mt-2">
+            <input type="submit" name="editTask" value="Update" class="btn-send btn btn-primary col-lg-4 mt-2">
           </form>
         <?php endif;?>
 
