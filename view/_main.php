@@ -15,13 +15,17 @@
       <?php if($isAuth) : ?>
         <form action="" method="post" class="d-flex col-lg-12 justify-content-around">
           <span class="login-username">username: <?=$_COOKIE['username'] ?? '';?></span>
-          <button name="logout" class="btn-logout btn btn-secondary" value='logout'>Logout</button>
+          <input type="hidden" value="logout" name="function">
+          <input type="hidden" value="isAuth" name="var">
+          <button name="logout" class="btn-logout btn btn-secondary" value='logout'>Log Out</button>
         </form>
       <?php else :  ?>
         <form action="" id="auth" method="post" class="d-flex col-lg-12 justify-content-center">
           <input type="text" name="username" placeholder="username" class="pl-2">
           <input type="password" name="password" placeholder="password" class="pl-2">
-          <input type="submit" value="Signin" class="btn btn-primary btn-signin">
+          <input type="hidden" value="login" name="function">
+          <input type="hidden" value="err" name="var">
+          <input type="submit" value="Sign In" class="btn btn-primary btn-signin">
         </form>
       <?php endif; ?>
     </div>
@@ -42,6 +46,8 @@
             </div>
             <p class="col-lg-12">Your task</p>
             <input type="text" name="task" placeholder="task" class="col-lg-11 col-xs-12">
+            <input type="hidden" value="createTask" name="function">
+            <input type="hidden" value="msg" name="var">
             <input type="submit" name="addTask" value="Save task" class="btn-send btn btn-primary col-lg-4 mt-2">
           </form>
 
@@ -59,12 +65,16 @@
             <p class="col-lg-12">Task</p>
             <input type="text" name="task" placeholder="task" class="col-lg-11 col-xs-12" value="<?=$editTask['task'];?>">
             <input type="hidden" name="id_task" value="<?=$editTask['id_task'];?>">
+            <input type="hidden" value="edit" name="function">
+            <input type="hidden" value="err" name="var">
             <input type="submit" name="editTask" value="Update" class="btn-send btn btn-primary col-lg-4 mt-2">
           </form>
         <?php endif;?>
 
-        <form action="" method="post" class="settings__sort col-lg-3  mt-3 pt-3">
+        <form action="" id='settingSort' method="post" class="settings__sort col-lg-3  mt-3 pt-3">
           <h4 class="text-center">Sorting on</h4>
+          <input type="hidden" value="typeSort" name="function">
+          <input type="hidden" value="skip" name="var">
           <input type="submit" value="Author" name="sort" class="btn btn-primary col-lg-12 col-md-3">
           <input type="submit" value="Email" name="sort" class="btn btn-primary col-lg-12 col-md-3">
           <input type="submit" value="Status" name="sort" class="btn btn-primary col-lg-12 col-md-3">
@@ -91,10 +101,14 @@
             
             <?php if($isAuth) : ?>
               <form method="post">
+                <input type="hidden" value="getTask_one" name="function">
+                <input type="hidden" value="editTask" name="var">
                 <input type="submit" name="edit" class="btn-edit btn btn-primary" value="Edit task">
                 <input type="hidden" name="numTask" value="<?=$tasks[$num]["id_task"]?>">
               </form>
               <form method="post">
+                <input type="hidden" value="successTask" name="function">
+                <input type="hidden" value="skip" name="var">
                 <input type="submit" name="ready" class="btn-ready btn btn-success" value="Success">
                 <input type="hidden" name="numTask" value="<?=$tasks[$num]["id_task"]?>">
               </form>

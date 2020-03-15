@@ -1,8 +1,7 @@
 <?php
 
-    include_once ('models/DB.php');
-
     function getTasks($field,$sort) {
+        setSort();
         $query = db_query("SELECT * FROM Tasks ORDER BY $field ".$sort);
         return $query->fetchAll();
     }
@@ -31,12 +30,19 @@
       reload();
     }
 
-
-    if(empty($_COOKIE['sort'])) {
-      setcookie('sort','ASC', time()+3600*24, '/');
+    function setSort() {
+      if(empty($_COOKIE['sort']) || empty($_COOKIE['sortField'])) {
+        echo 'БЫЛИ ПУСТЫЕ КУКИ И Я ИХ ЗАПОЛНИЛ';
+        setcookie('sort','ASC', time()+3600*24, '/');
+        setcookie('sortField','author', time()+3600*24, '/');
+        reload();
+      }
     }
 
-    function changeSort() {
-        ($_COOKIE['sort'] == "ASC") ?  setcookie('sort','DESC', time()+3600*24, '/') : setcookie('sort','ASC', time()+3600*24, '/');
+    function typeSort() {
+        ($_COOKIE['sort'] == "ASC") ?  
+          setcookie('sort','DESC', time()+3600*24, '/') : 
+          setcookie('sort','ASC', time()+3600*24, '/');
+        setcookie('sortField',$_POST['sort'], time()+3600*24,'/');
         reload();
     }
