@@ -16,7 +16,7 @@
       
         $db = db_connect();
         
-        // return $db->lastInsertId();
+        reload();
     }
 
     function updateTask($arrEdit) {

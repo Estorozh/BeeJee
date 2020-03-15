@@ -1,5 +1,5 @@
 <?php 
-    // error_reporting(0);
+    
     include_once ('./controllers/auth.php');
     include_once ('./controllers/postRouting.php');
 

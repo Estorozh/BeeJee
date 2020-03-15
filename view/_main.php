@@ -56,18 +56,18 @@
             <h4 class="text-center text-danger">Edit task</h4>
             <div class="col-lg-6 col-xs-12">
               <p class="col-lg-12">Email</p>
-              <input type="text" name="email" placeholder="email" class="col-lg-12" value="<?=$editTask['email'];?>">
+              <input type="text" name="email" placeholder="email" class="col-lg-12" value="<?=$editTask['email'];?>" readonly>
             </div>
             <div class="col-lg-5 col-xs-12">
               <p class="col-lg-12">Name</p>
-              <input type="text" name="author" placeholder="name" class="col-lg-12" value="<?=$editTask['author'];?>">
+              <input type="text" name="author" placeholder="name" class="col-lg-12" value="<?=$editTask['author'];?>" readonly>
             </div>
             <p class="col-lg-12">Task</p>
             <input type="text" name="task" placeholder="task" class="col-lg-11 col-xs-12" value="<?=$editTask['task'];?>">
             <input type="hidden" name="id_task" value="<?=$editTask['id_task'];?>">
             <input type="hidden" value="edit" name="function">
             <input type="hidden" value="err" name="var">
-            <input type="submit" name="editTask" value="Update" class="btn-send btn btn-primary col-lg-4 mt-2">
+            <input type="submit" name="editTask" value="Update" class="btn-send btn btn-primary col-lg-4 mt-2" disabled>
           </form>
         <?php endif;?>
 
