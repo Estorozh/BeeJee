@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:3306
--- Время создания: Мар 15 2020 г., 03:10
+-- Время создания: Мар 15 2020 г., 05:05
 -- Версия сервера: 5.7.29-0ubuntu0.18.04.1
 -- Версия PHP: 7.2.24-0ubuntu0.18.04.3
 
@@ -31,18 +31,16 @@ CREATE TABLE `Tasks` (
   `author` text NOT NULL,
   `email` text NOT NULL,
   `task` text NOT NULL,
-  `status` int(1) DEFAULT '0'
+  `status` tinyint(1) DEFAULT '0',
+  `edited` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `Tasks`
 --
 
-INSERT INTO `Tasks` (`id_task`, `author`, `email`, `task`, `status`) VALUES
-(1, 'Evgeniy', 'mr.ahilis@gmail.com', 'Create Form', 0),
-(2, 'Evgeniy', 'mr.ahilis@gmail.com', 'Create Page', 0),
-(62, 'Thats OK', 'test@mail.ru', 'Successfully', 1),
-(63, 'test', 'test@mail.ru', 'test task', 1);
+INSERT INTO `Tasks` (`id_task`, `author`, `email`, `task`, `status`, `edited`) VALUES
+(64, 'test', 'test@mail.ru', 'TEST OK', 1, 1);
 
 --
 -- Индексы сохранённых таблиц
@@ -62,7 +60,7 @@ ALTER TABLE `Tasks`
 -- AUTO_INCREMENT для таблицы `Tasks`
 --
 ALTER TABLE `Tasks`
-  MODIFY `id_task` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id_task` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

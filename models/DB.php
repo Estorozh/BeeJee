@@ -3,7 +3,7 @@
 	function db_connect(){
 		static $db;
 		
-		if($db === null){
+		if($db === null) {
 			$db = new PDO(sprintf('%s:host=%s;dbname=%s', 'mysql', 'localhost', 'beejee'), 'root', '1');
 			$db->exec('SET NAMES UTF8');
 		}

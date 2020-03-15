@@ -32,29 +32,29 @@
         <?php if(empty($editTask)) :?>
           <form action="" id="settings__addItem" method="post" class="col-lg-9 col-md-12">
             <h4 class="text-center">Add task</h4>
-            <div class="col-lg-5 col-xs-12">
-              <p class="col-lg-12">Your name</p>
-              <input type="text" name="author" placeholder="name" class="col-lg-12">
-            </div>
             <div class="col-lg-6 col-xs-12">
               <p class="col-lg-12">Your email</p>
               <input type="text" name="email" placeholder="email" class="col-lg-12">
             </div>
+            <div class="col-lg-5 col-xs-12">
+              <p class="col-lg-12">Your name</p>
+              <input type="text" name="author" placeholder="name" class="col-lg-12">
+            </div>
             <p class="col-lg-12">Your task</p>
             <input type="text" name="task" placeholder="task" class="col-lg-11 col-xs-12">
-            <input type="submit" name="addTask" value="Send" class="btn-send btn btn-primary col-lg-2 offset-lg-5 mt-2">
+            <input type="submit" name="addTask" value="Save task" class="btn-send btn btn-primary col-lg-2 offset-lg-5 mt-2">
           </form>
 
         <?php else : ?>
           <form action="" id="settings__editItem" method="post" class="col-lg-9 mt-3 p-3 pl-5">
             <h4 class="text-center text-danger">Edit task</h4>
-            <div class="col-lg-5 col-xs-12">
-              <p class="col-lg-12">Name</p>
-              <input type="text" name="author" placeholder="name" class="col-lg-12" value="<?=$editTask['author'];?>">
-            </div>
             <div class="col-lg-6 col-xs-12">
               <p class="col-lg-12">Email</p>
               <input type="text" name="email" placeholder="email" class="col-lg-12" value="<?=$editTask['email'];?>">
+            </div>
+            <div class="col-lg-5 col-xs-12">
+              <p class="col-lg-12">Name</p>
+              <input type="text" name="author" placeholder="name" class="col-lg-12" value="<?=$editTask['author'];?>">
             </div>
             <p class="col-lg-12">Task</p>
             <input type="text" name="task" placeholder="task" class="col-lg-11 col-xs-12" value="<?=$editTask['task'];?>">
@@ -100,12 +100,13 @@
               </form>
             <?php endif; ?>
 
-            <?php if($tasks[$num]['status'] == '0') {
-              echo '<span class="status text-danger">Waiting</span>';
-            } elseif($tasks[$num]['status'] == '1') {
-              echo '<span class="status text-success">Success</span>';
-            } else {
-              echo '<span class="status text-info">Edited by admin</span>';
+            <?php if($tasks[$num]['status']) : ?>
+              <span class="status text-success">Success</span>
+            <?php else :?>
+              <span class="status text-danger">Waiting</span>
+            <?php endif; ?>
+            <?php if($tasks[$num]['edited']) {
+              echo '<span class="edit text-info">Edited by admin</span>';
             } ?>
 
           </div>
@@ -114,10 +115,15 @@
       </div>
     </div>
 
-  <div class="modal <?php if(!empty($err)) {echo 'open';} ?>">
+  <div class="modal <?php if(!empty($err) || !empty($msg)) {echo 'open';} ?>">
     <div class="modal-body">
       <span class="modal-close">&times;</span>
-      <p class="modal-body-text"><?=$err?></p>
+      <p class="modal-body-text">
+        <?php
+          if(!empty($err)) echo $err;
+          if(!empty($msg)) echo $msg;
+        ?>
+      </p>
     </div>
     
   </div>

@@ -17,17 +17,17 @@
       
         $db = db_connect();
         
-        return $db->lastInsertId();
+        // return $db->lastInsertId();
     }
 
     function updateTask($arrEdit) {
       extract($arrEdit);
-      $query = db_query(sprintf("UPDATE Tasks SET email='%s', author='%s', task='%s', status='2' WHERE id_task='%s' ", xss($email), xss($author), xss($task), $id_task));
+      $query = db_query(sprintf("UPDATE Tasks SET email='%s', author='%s', task='%s', edited=1 WHERE id_task='%s' ", xss($email), xss($author), xss($task), $id_task));
       reload();
     }
 
     function successTask($id) {
-      $query = db_query(sprintf("UPDATE Tasks SET status='1' WHERE id_task='%s' ", $id));
+      $query = db_query(sprintf("UPDATE Tasks SET status=1 WHERE id_task='%s' ", $id));
       reload();
     }
 

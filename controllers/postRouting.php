@@ -4,13 +4,15 @@
     if(count($_POST) > 0) {
         foreach($_POST as $key=>$value) {
             if(empty($value)) {
-                $err = "Please, fill all fields";
+                $err = "Please, fill all fields<br>";
             }
-            if($key == 'email'){
-                if(!checkEmail($value)) {
-                    $err = "Please, input the correct email";
+
+            if(isset($_POST['email'])) {
+                if(!checkEmail($_POST['email'])) {
+                    $msg="Please, input the correct email";
                 }
             }
+
         }
         if(empty($err)) {
             if (isset($_POST['username'])) {
@@ -46,4 +48,5 @@
         $email = '';
         $task = '';
         $err = '';
+        $msg = '';
     }
