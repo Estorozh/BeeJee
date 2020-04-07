@@ -16,7 +16,7 @@
       
         $db = db_connect();
         
-        reload();
+        //reload();
     }
 
     function updateTask($arrEdit) {
